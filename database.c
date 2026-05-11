@@ -5,6 +5,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <windows.h>
+
+static void getFilePath(const char *filename, char *fullpath, int size) {
+    GetModuleFileNameA(NULL, fullpath, size);
+    char *last = strrchr(fullpath, '\\');
+    if (last) *(last+1) = '\0';
+    strncat(fullpath, filename, size - strlen(fullpath) - 1);
+}
 
 static const char *PRODUCTS_FILE = "products.txt";
 
@@ -12,7 +20,9 @@ int loadProducts(Product arr[], int *count) {
     if (!count || !arr) return -1;
     *count = 0;
 
-    FILE *f = fopen(PRODUCTS_FILE, "r");
+    char path[512];
+    getFilePath("products.txt", path, sizeof(path));
+    FILE *f = fopen(path, "r");
     if (!f) {
         printf("Failed to open %s for reading\n", PRODUCTS_FILE);
         return -1;
@@ -79,7 +89,9 @@ int loadProducts(Product arr[], int *count) {
 }
 
 int saveProducts(Product arr[], int count) {
-    FILE *f = fopen(PRODUCTS_FILE, "w");
+    char path[512];
+    getFilePath("products.txt", path, sizeof(path));
+    FILE *f = fopen(path, "w");
     if (!f) {
         printf("Failed to open %s for writing\n", PRODUCTS_FILE);
         return -1;
@@ -119,7 +131,9 @@ int saveProducts(Product arr[], int count) {
 }
 
 int appendProduct(Product p) {
-    FILE *f = fopen(PRODUCTS_FILE, "a");
+    char path[512];
+    getFilePath("products.txt", path, sizeof(path));
+    FILE *f = fopen(path, "a");
     if (!f) {
         printf("Failed to open %s for appending\n", PRODUCTS_FILE);
         return -1;

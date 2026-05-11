@@ -3,6 +3,14 @@
 #include "auth.h"
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
+
+static void getFilePath(const char *filename, char *fullpath, int size) {
+    GetModuleFileNameA(NULL, fullpath, size);
+    char *last = strrchr(fullpath, '\\');
+    if (last) *(last+1) = '\0';
+    strncat(fullpath, filename, size - strlen(fullpath) - 1);
+}
 
 static const char *USERS_FILE = "users.txt";
 static const char *ADMIN_USER = "admin";
@@ -13,7 +21,9 @@ int registerUser(const char *username, const char *password, const char *role) {
     if (!username || !password || !role) return -1;
 
     // Check if username already exists in users.txt
-    FILE *f = fopen(USERS_FILE, "r");
+    char path[512];
+    getFilePath("users.txt", path, sizeof(path));
+    FILE *f = fopen(path, "r");
     if (f) {
         char line[200];
         while (fgets(line, sizeof(line), f)) {
@@ -29,7 +39,8 @@ int registerUser(const char *username, const char *password, const char *role) {
     }
 
     // Append new user to users.txt
-    f = fopen(USERS_FILE, "a");
+    getFilePath("users.txt", path, sizeof(path));
+    f = fopen(path, "a");
     if (!f) {
         printf("Failed to open %s for writing\n", USERS_FILE);
         return -1;
@@ -59,7 +70,9 @@ int loginUser(const char *username, const char *password, User *loggedIn) {
     }
 
     // Check users.txt for regular user
-    FILE *f = fopen(USERS_FILE, "r");
+    char path[512];
+    getFilePath("users.txt", path, sizeof(path));
+    FILE *f = fopen(path, "r");
     if (!f) {
         printf("Failed to open %s for reading\n", USERS_FILE);
         return -1;

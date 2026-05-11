@@ -4,9 +4,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <windows.h>
 
-static const char *HISTORY_FILE = "history.txt";
-static const char *SEARCHCOUNT_FILE = "searchcount.txt";
+static void getFilePath(const char *filename, char *fullpath, int size) {
+    GetModuleFileNameA(NULL, fullpath, size);
+    char *last = strrchr(fullpath, '\\');
+    if (last) *(last+1) = '\0';
+    strncat(fullpath, filename, size - strlen(fullpath) - 1);
+}
 
 int saveHistory(char *username, Product p) {
     if (!username) return -1;
@@ -16,9 +21,11 @@ int saveHistory(char *username, Product p) {
     char timestamp[50];
     strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeinfo);
 
-    FILE *f = fopen(HISTORY_FILE, "a");
+    char path[512];
+    getFilePath("history.txt", path, sizeof(path));
+    FILE *f = fopen(path, "a");
     if (!f) {
-        printf("Failed to open %s for writing\n", HISTORY_FILE);
+        printf("Failed to open history.txt for writing\n");
         return -1;
     }
 
@@ -31,7 +38,9 @@ int saveHistory(char *username, Product p) {
 int viewHistory(char *username) {
     if (!username) return -1;
 
-    FILE *f = fopen(HISTORY_FILE, "r");
+    char path[512];
+    getFilePath("history.txt", path, sizeof(path));
+    FILE *f = fopen(path, "r");
     if (!f) {
         printf("No history file found\n");
         return -1;
@@ -67,7 +76,9 @@ int updateSearchCount(Product p) {
     int count = 0;
 
     // Read existing search counts
-    FILE *f = fopen(SEARCHCOUNT_FILE, "r");
+    char path[512];
+    getFilePath("searchcount.txt", path, sizeof(path));
+    FILE *f = fopen(path, "r");
     if (f) {
         char line[200];
         while (fgets(line, sizeof(line), f) && count < 1024) {
@@ -101,9 +112,10 @@ int updateSearchCount(Product p) {
     }
 
     // Write back all counts
-    f = fopen(SEARCHCOUNT_FILE, "w");
+    getFilePath("searchcount.txt", path, sizeof(path));
+    f = fopen(path, "w");
     if (!f) {
-        printf("Failed to open %s for writing\n", SEARCHCOUNT_FILE);
+        printf("Failed to open searchcount.txt for writing\n");
         return -1;
     }
 
@@ -119,7 +131,9 @@ int viewMostSearched(void) {
     SearchCount counts[1024];
     int count = 0;
 
-    FILE *f = fopen(SEARCHCOUNT_FILE, "r");
+    char path[512];
+    getFilePath("searchcount.txt", path, sizeof(path));
+    FILE *f = fopen(path, "r");
     if (!f) {
         printf("No search count file found\n");
         return -1;
