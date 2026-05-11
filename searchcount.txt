@@ -1,0 +1,3 @@
+9300100000001|Britannia Digestive|1
+9300200000001|Coca-Cola|1
+9300300000010|Milkmaid Condensed Milk|1

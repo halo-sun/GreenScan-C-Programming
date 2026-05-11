@@ -1,0 +1,15 @@
+9300100000001|Good Day Butter Biscuit|Biscuits|Butter Biscuit|Good Day Biscuit|Wheat Flour, Palm Oil, Sugar, Salt|Paper|58
+9300100000002|Good Day Cashew Biscuit|Biscuits|Cashew Biscuit|Good Day Biscuit|Wheat Flour, Cashew, Palm Oil, Sugar|Paper|62
+9300100000003|Good Day Nuts Biscuit|Biscuits|Nuts Biscuit|Good Day Biscuit|Wheat Flour, Mixed Nuts, Palm Oil, Sugar|Paper|65
+9300100000004|Milkmaid Condensed Milk|Dairy|Condensed Milk|Milkmaid Condensed Milk|Milk, Sugar, Preservatives|Metal|52
+9300100000005|Milkmaid Sweetened Condensed Milk|Dairy|Condensed Milk|Milkmaid Condensed Milk|Milk, Sugar, Preservatives|Metal|50
+9300100000006|Amul Butter|Dairy|Butter|Amul Butter|Milk Fat, Milk Solids, Salt|Paper|65
+9300100000007|Amul Garlic Butter|Dairy|Butter|Amul Butter|Milk Fat, Garlic, Milk Solids, Salt|Paper|63
+9300100000008|Lay's Classic Salted|Snacks|Potato Chips|Lay's Potato Chips|Potatoes, Vegetable Oil, Salt|Plastic|40
+9300100000009|Kurkure Masala|Snacks|Puffed Snacks|Kurkure|Corn Flour, Vegetable Oil, Salt, Spices|Plastic|35
+9300100000010|Horlicks|Health Drink|Malt Drink|Horlicks|Malted Barley, Wheat, Milk Solids, Sugar|Plastic|58
+9300100000011|Bournvita|Health Drink|Chocolate Drink|Bournvita|Malt, Milk Solids, Cocoa, Sugar|Plastic|55
+9300100000012|Coca-Cola|Soft Drinks|Cola|Coca-Cola|Carbonated Water, Sugar, Artificial Color|Plastic|28
+9300100000013|Sprite|Soft Drinks|Lemon|Sprite|Carbonated Water, Sugar, Citric Acid|Plastic|30
+9300100000014|Maggi Noodles|Instant Food|Noodles|Maggi Noodles|Wheat Flour, Palm Oil, Salt, Sugar|Plastic|40
+9300100000015|Yippee Noodles|Instant Food|Noodles|Yippee Noodles|Wheat Flour, Edible Oil, Salt, Spices|Plastic|45
